@@ -14,7 +14,7 @@ const App = () => {
     if (nome.trim() && valor.trim() && quantidade.trim()) {
       const novoItem = { id: idCounter++, nome, valor, quantidade: parseInt(quantidade) };
       if (idCounter > 9999) {
-        Alert.alert('Erro', 'Limite de itens atingido.');
+        Alert.alert('Erro', 'Excesso.');
         return;
       }
       setEstoque([...estoque, novoItem]);
@@ -22,7 +22,7 @@ const App = () => {
       setValor('');
       setQuantidade('');
     } else {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos corretamente.');
+      Alert.alert('Erro', 'Preencha todos os campos.');
     }
   };
 
@@ -36,36 +36,36 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Estoque Farmacêutico</Text>
+      <Text style={styles.title}>Cadastro de Produto</Text>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.inputNome}
-          placeholder="Nome do item"
+          placeholder="Nome do Produto"
           value={nome}
           onChangeText={setNome}
         />
         <TextInput
           style={styles.inputValor}
-          placeholder="Valor"
+          placeholder="Preço"
           value={valor}
           onChangeText={setValor}
           keyboardType="numeric"
         />
         <TextInput
           style={styles.inputQuantidade}
-          placeholder="Qtd"
+          placeholder="Unidade"
           value={quantidade}
           onChangeText={setQuantidade}
           keyboardType="numeric"
         />
       </View>
-      <Button title="Adicionar" onPress={adicionarItem} />
+      <Button title="Cadastrar produto" onPress={adicionarItem} />
       <FlatList
         data={estoque}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.itemContainer} onPress={() => mostrarDetalhes(item)}>
-            <Text>{item.nome} - R${item.valor} - Qtd: {item.quantidade}</Text>
+            <Text>{item.nome} - R${item.valor} - Quantidade: {item.quantidade}</Text>
           </TouchableOpacity>
         )}
       />
@@ -74,7 +74,7 @@ const App = () => {
           <Text style={styles.detalhesTitle}>Detalhes do Item</Text>
           <Text>Código: {detalheItem.id}</Text>
           <Text>Nome: {detalheItem.nome}</Text>
-          <Text>Valor: R${detalheItem.valor}</Text>
+          <Text>Preço: R${detalheItem.valor}</Text>
           <Text>Quantidade: {detalheItem.quantidade}</Text>
           <Button title="Fechar" onPress={fecharDetalhes} />
         </View>
