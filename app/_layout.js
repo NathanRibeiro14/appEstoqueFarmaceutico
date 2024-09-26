@@ -14,7 +14,7 @@ const App = () => {
     if (nome.trim() && valor.trim() && quantidade.trim()) {
       const novoItem = { id: idCounter++, nome, valor, quantidade: parseInt(quantidade) };
       if (idCounter > 9999) {
-        Alert.alert('Erro', 'Excesso.');
+        Alert.alert('Erro', 'Excesso de produtos.');
         return;
       }
       setEstoque([...estoque, novoItem]);
@@ -40,7 +40,7 @@ const App = () => {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.inputNome}
-          placeholder="Nome do Produto"
+          placeholder="Produto"
           value={nome}
           onChangeText={setNome}
         />
